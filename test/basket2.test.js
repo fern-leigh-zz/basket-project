@@ -1,8 +1,32 @@
+
+/**
+ * I can add a book to my basket. The number of items in my basket will increase by 1, and the price of the book will 
+ * be added to the balance.
+ * 
+ * I can remove a book from my basket. The number of items in my basket will decrease by 1, 
+ * and the price of the book will be deducted form the balance. 
+ * 
+ * I can add multiple items to my basket. The number of items will increase according to the amount of books I have
+ * added and the price of each book I add will be added to the balance. 
+ * 
+ * I can remove multiple books from my basket. The number of items in my basket will derease by the amount of books
+ * I have removed and the price of each book removed will be deducted form the balance.
+ * 
+ * If I have more than 10 books in my basket - each additional book I put in will cost 75% of it's original price.
+ * 
+ * If I remove a discounted book from my basket, my balance will decrease by 75% of the orgiinal price of the book.
+ * 
+ * If I remove a book that was not discounted from my basket, my balance will decrease by the pric of the book. If there
+ * are now 10 or less books in my basket, any previously discounted books will be charged at full price and my balance
+ * will be updated accordingly. 
+ * 
+ */
+
 const basket = require('../app/basket2');
 
 test('check that balance is updated after adding a book to empty basket', () => {
     //starting condition
-    expect(basket.getEmptyBalance()).toBe(0);
+    expect(basket.subTotal()).toBe(0);
 
     //Given
     let fantasticMrFox = {
@@ -17,10 +41,10 @@ test('check that balance is updated after adding a book to empty basket', () => 
     basket.addToBasket(fantasticMrFox, 1);
 
     //Then
-    expect(basket.getBalance()).toBe(7);
+    expect(basket.subTotal()).toBe(7);
   }); //end of test 1
 
-  test('Check that balance is updated when a book is removed from basket that is not empty',() => {
+ /* test('Check that balance is updated when a book is removed from basket that is not empty',() => {
     //starting condition
     expect(basket.getBalance()).toBe(7);
 
@@ -131,4 +155,4 @@ test('Check that balance is zero if basket reset', () => {
 
     //Then
     expect(basket.getBalance()).toBe(0);
-});
+}); */

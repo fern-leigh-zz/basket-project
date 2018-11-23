@@ -1,4 +1,38 @@
-const emptyBalance = 0;
+let balance = 0;
+let itemsInBasket = 0;
+
+function addToBasket (book) {
+    itemsInBasket ++;
+    balance = (book.price);
+}
+
+function subTotal () {
+    return balance;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const emptyBalance = 0;
 let newBalance = emptyBalance;
 let booksInBasket= 0;
 let booksToBeDiscounted = 0;
@@ -55,4 +89,4 @@ module.exports = {
     getEmptyBalance,
     getBalance,
     resetBasket
-};
+};*/

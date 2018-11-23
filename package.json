@@ -1,0 +1,22 @@
+{
+    "name": "Step-Into-Tech-Projects",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "jest"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Jadelette/Step-Into-Tech-Projects.git"
+    },
+    "author": "Jadelette",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/Jadelette/Step-Into-Tech-Projects/issues"
+    },
+    "homepage": "https://github.com/Jadelette/Step-Into-Tech-Projects.git#readme",
+    "devDependencies": {
+      "jest": "23.6.0"
+    }
+  }
