@@ -42,10 +42,10 @@ test('check that balance is updated after adding a book to empty basket', () => 
     //Then
     expect(basket2.subTotal()).toBe(7);
     expect(basket2.getItems()).toBe(1);
-  }); //end of test 1
+}); //end of test 1
 
- test('Check that balance is updated when a book is removed from basket that is not empty',() => {
-   //Given
+test('Check that balance is updated when a book is removed from basket that is not empty', () => {
+    //Given
     expect(basket2.subTotal()).toBe(7);
 
     //When
@@ -54,12 +54,12 @@ test('check that balance is updated after adding a book to empty basket', () => 
     //Then
     expect(basket2.subTotal()).toBe(0);
     expect(basket2.getItems()).toBe(0);
-    }); //end of test 2
+}); //end of test 2
 
-test('Check balance when multiple books added to empty basket',() => {
+test('Check balance when multiple books added to empty basket', () => {
     //Given
     expect(basket2.subTotal()).toBe(0);
- 
+
     //when
     basket2.addToBasket(fantasticMrFox, 2);
 
@@ -67,9 +67,9 @@ test('Check balance when multiple books added to empty basket',() => {
     expect(basket2.subTotal()).toBe(14);
     expect(basket2.getItems()).toBe(2);
 
-    }); //end of test 3
+}); //end of test 3
 
-test('Check that balance is updated when multiple books are removed from basket that is not empty',() => {
+test('Check that balance is updated when multiple books are removed from basket that is not empty', () => {
     //Given
     expect(basket2.subTotal()).toBe(14);
 
@@ -79,30 +79,22 @@ test('Check that balance is updated when multiple books are removed from basket 
     //Then
     expect(basket2.subTotal()).toBe(0);
     expect(basket2.getItems()).toBe(0);
-    }); //end of test 4
+}); //end of test 4
 
 
-/*test('Check that if more than 10 books added a 25% discount is applied to any over 10' , () => {
-    //starting condition
-    expect(basket.getEmptyBalance()).toBe(0);
-
+test('Check that if more than 10 books added a 25% discount is applied to any over 10', () => {
     //Given
-    let fantasticMrFox = {
-        price: 7,
-        title: "Fantastic Mr Fox",
-        author: "Roald Dahl",
-        isbn: "12345678",
-        type: "hardback"
-    };
+    expect(basket2.subTotal()).toBe(0);
 
     //When 
-    basket.addToBasket(fantasticMrFox,11);
+    basket.addToBasket(fantasticMrFox, 11);
 
     //Then
-    expect(basket.getBalance()).toBe(75.25);
-});
+    expect(basket2.subTotal()).toBe(75.25);
+    expect(basket2.getItems()).toBe(11);
+}); //end of test 5
 
-test('Check that discount recalculated if books added after discount applied', () => {
+/*test('Check that discount recalculated if books added after discount applied', () => {
     //starting condition & Given
     expect(basket.getBalance()).toBe(75.25);
 

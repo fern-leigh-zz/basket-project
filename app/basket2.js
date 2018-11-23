@@ -1,17 +1,22 @@
 let balance = 0;
 let itemsInBasket = 0;
+let fullPriceItems = 0;
+let discountedItems = 0;
 
-function addToBasket (book, copies) {
-    for (i = 1; i<=copies; i++){
-    itemsInBasket ++;
-    balance += (book.price);
+function addToBasket(book, copies) {
+    for (i = 1; i <= copies; i++) {
+        itemsInBasket++;
+            if (itemsInBasket>10) {
+
+            }
+        balance += (book.price);
     }
 };
 
 function removeFromBasket(book, copies) {
-    for (i = 1; i <=copies; i++) {
-    itemsInBasket --;
-    balance -= (book.price);
+    for (i = 1; i <= copies; i++) {
+        itemsInBasket--;
+        balance -= (book.price);
     }
 };
 
