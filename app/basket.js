@@ -37,12 +37,12 @@ function getBalance() {
 
 function getEmptyBalance() {
     return emptyBalance;
-}
+};
 
 function resetBasket() {
     newBalance = emptyBalance;
     booksInBasket = 0;
-}
+};
 
 module.exports = {
     addToBasket,

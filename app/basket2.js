@@ -1,15 +1,34 @@
 let balance = 0;
 let itemsInBasket = 0;
 
-function addToBasket (book) {
+function addToBasket (book, copies) {
+    for (i = 1; i<=copies; i++){
     itemsInBasket ++;
-    balance = (book.price);
-}
+    balance += (book.price);
+    }
+};
 
-function subTotal () {
+function removeFromBasket(book, copies) {
+    for (i = 1; i <=copies; i++) {
+    itemsInBasket --;
+    balance -= (book.price);
+    }
+};
+
+function getItems() {
+    return itemsInBasket;
+};
+
+function subTotal() {
     return balance;
-}
+};
 
+module.exports = {
+    addToBasket,
+    removeFromBasket,
+    subTotal,
+    getItems
+};
 
 
 
