@@ -87,40 +87,58 @@ test('Check that if more than 10 books added a 25% discount is applied to any ov
     expect(basket2.subTotal()).toBe(0);
 
     //When 
-    basket.addToBasket(fantasticMrFox, 11);
+    basket2.addToBasket(fantasticMrFox, 11);
 
     //Then
     expect(basket2.subTotal()).toBe(75.25);
     expect(basket2.getItems()).toBe(11);
 }); //end of test 5
 
-/*test('Check that discount recalculated if books added after discount applied', () => {
-    //starting condition & Given
-    expect(basket.getBalance()).toBe(75.25);
-
+test('Check that discount recalculated if books added after discount applied', () => {
     //Given
-    let fantasticMrFox = {
-        price: 7,
-        title: "Fantastic Mr Fox",
-        author: "Roald Dahl",
-        isbn: "12345678",
-        type: "hardback"
-    };
+    expect(basket2.subTotal()).toBe(75.25);
 
     //when
-    basket.addToBasket(fantasticMrFox, 3);
+    basket2.addToBasket(fantasticMrFox, 3);
 
     //Then
-    expect(basket.getBalance()).toBe(91);
-});
+    expect(basket2.subTotal()).toBe(91);
+    expect(basket2.getItems()).toBe(14);
+}); //end of test 6
 
-test('Check that balance is zero if basket reset', () => {
-    //starting condition & Given
-    expect(basket.getBalance()).toBe(91);
+
+test('Check that discounted price of book is deducted from balance if discounted book is removed from basket', () => {
+    //Given
+    expect(basket2.subTotal()).toBe(91);
+
+    //when
+    basket2.removeFromBasket(fantasticMrFox,3);
+
+    //Then
+    expect(basket2.subTotal()).toBe(75.25);
+    expect(basket2.getItems()).toBe(11);
+}); //end of test 7
+
+test('check that if discounted and full price items are removed from basket, the balance is updated accordingly', ()=>{
+    //Given
+    expect(basket2.subTotal()).toBe(75.25);
 
     //When
-    basket.resetBasket();
+    basket2.removeFromBasket(fantasticMrFox,3);
 
     //Then
-    expect(basket.getBalance()).toBe(0);
-}); */
+    expect(basket2.subTotal()).toBe(56);
+    expect(basket2.getItems()).toBe(8);
+}); // end of test 8
+
+test('Check that balance is zero if basket reset', () => {
+    //Given
+    expect(basket2.subTotal()).toBe(56);
+
+    //When
+    basket2.emptyBasket();
+
+    //Then
+    expect(basket2.subTotal()).toBe(0);
+    expect(basket2.getItems()).toBe(0);
+}); // end of test 9
