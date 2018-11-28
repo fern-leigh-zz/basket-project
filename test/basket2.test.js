@@ -156,17 +156,32 @@ test('Check that you cannot remove more copies of a book from a basket that are 
     expect(basket2.getItems()).toBe(1);
 }); //end of test 6
 
+test('check the sort and reverse function puts books in descending order by price', () => {
+     //Given
+     expect(basket2.getBalance()).toBe(7);
+     expect(basket2.getItems()).toBe(1);
+ 
+     //When 
+     basket2.addToBasket(fantasticMrFox, 3); //price 7
+     basket2.addToBasket(C22, 1) //price 10
+     basket2.addToBasket(YDKJS, 2); //price 3
+     basket2.addToBasket(witches, 3); //price 8 
+     basket2.addToBasket(jamesPeach, 4) //price 8
+
+     let basket = basket2.sortAndReverse();
+
+     //Then
+     expect(basket[0].title).toBe("Catch 22");
+     expect(basket[0].price).toBe(10);
+     expect(basket[13].title).toBe("You don't know JS")
+     expect(basket[13].price).toBe(3);
+});
+
 test('Check that if more than 10 books added a 25% discount is applied to cheapest items', () => {
     //Given
-    expect(basket2.getBalance()).toBe(7);
-    expect(basket2.getItems()).toBe(1);
+    expect(basket2.getItems()).toBe(14);
 
     //When 
-    basket2.addToBasket(fantasticMrFox, 3); //price 7
-    basket2.addToBasket(C22, 1) //price 10
-    basket2.addToBasket(YDKJS, 2); //price 3
-    basket2.addToBasket(witches, 3); //price 8 
-    basket2.addToBasket(jamesPeach, 4) //price 8
     //if all items full price, balance is £100 and there are 14 items 
     //(test passes if the above figures are put in the expect statements and below method call is commented out)
     //need to find 4 cheapeast items and apply discount to these
@@ -178,7 +193,7 @@ test('Check that if more than 10 books added a 25% discount is applied to cheape
     //four cheapest items are YDKJS * 3 (2.25) and FMF *1 (5.25)
 }); //end of test 7
 
-/*test('Check that discount recalculated if books added after discount applied', () => {
+test('Check that discount recalculated if books added after discount applied', () => {
     //Given
     expect(basket2.subTotal()).toBe(75.25);
 

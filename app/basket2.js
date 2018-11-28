@@ -35,10 +35,15 @@ function compare(a,b) {
     return 0;
   }
 
+  function sortAndReverse (){
+    itemsInBasket.sort(compare);
+    itemsInBasket.reverse();
+    return itemsInBasket;
+  };
+
 function subTotal() {
     if (itemsInBasket.length > 10) {
-       itemsInBasket.sort(compare);
-       itemsInBasket.reverse();
+        sortAndReverse();
         for (i=10; i <= itemsInBasket.length; i++) {
             let discountedPrice = (itemsInBasket[i].price*0.25);
             balance -= discountedPrice;
@@ -69,6 +74,7 @@ module.exports = {
     addToBasket,
     findBookInBasket,
     removeFromBasket,
+    sortAndReverse,
     subTotal,
     getItems,
     getBalance
