@@ -42,18 +42,17 @@ function compare(a,b) {
   };
 
 function subTotal() {
-    if (itemsInBasket.length > 10) {
         balance = 0;
         const basket = sortAndReverse();
-        for (i=0; i==9; i++) {
+        let limit = (basket.length - 1);
+        for (i=0; i <= 9; i++) {
             let fullPrice = basket[i].price;
             balance += fullPrice;
         };
-        for (i=10; i <= basket.length; i++) {
-            let discountedPrice = (basket[i].price * 0.25);
-            balance -= discountedPrice;
+        for (i=10; i <= limit; i++) {
+          let discountedPrice = (basket[i].price * 0.75);
+            balance += discountedPrice;
             };
-        };
     };
 
 
@@ -71,6 +70,9 @@ function getItems() {
 
 
 function getBalance(){
+    if (itemsInBasket.length > 10) {
+        subTotal();
+    };
     return balance
 };
 

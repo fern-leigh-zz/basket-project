@@ -183,13 +183,14 @@ test('Check that if more than 10 books added a 25% discount is applied to cheape
 
     //When 
     //if all items full price, balance is £100 and there are 14 items 
+    //cost of 10 highest priced books is £80
     //need to find 4 cheapest items and apply discount to these
     basket2.subTotal();
 
     //Then
     expect(basket2.getItems()).toBe(14);
-    expect(basket2.getBalance()).toBe(88);  
-    //four cheapest items are YDKJS * 3 (2.25) and FMF *1 (5.25)
+    expect(basket2.getBalance()).toBe(95);  
+    //four cheapest items are YDKJS * 2 (2.25) and FMF *2 (5.25) so £15 (+£80)
 }); //end of test 7
 
 /*test('Check that discount recalculated if books added after discount applied', () => {
