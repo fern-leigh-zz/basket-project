@@ -1,8 +1,5 @@
 let balance = 0;
 let itemsInBasket = [];
-let fullPriceItems = [];
-let discountedItems =[];
-
 
 
 function addToBasket(book, copies) {
@@ -30,6 +27,26 @@ function removeFromBasket(book, copies) {
 };
 
 
+function compare(a,b) {
+    if (a.price < b.price)
+      return -1;
+    if (a.price > b.price)
+      return 1;
+    return 0;
+  }
+
+function subTotal() {
+    if (itemsInBasket.length > 10) {
+       itemsInBasket.sort(compare);
+       itemsInBasket.reverse();
+        for (i=10; i <= itemsInBasket.length; i++) {
+            let discountedPrice = (itemsInBasket[i].price*0.25);
+            balance -= discountedPrice;
+            };
+        };
+    };
+
+
 /*function emptyBasket(){
     itemsInBasket = 0;
     discountedItems = 0;
@@ -38,16 +55,10 @@ function removeFromBasket(book, copies) {
 }
 */
 
-
 function getItems() {
     return itemsInBasket.length;
 };
 
-/*function subTotal() {
-    for (i=0; i <= itemsInBasket.length; i++){
-        balance += itemsInBasket[i].price;
-    }
-}; */
 
 function getBalance(){
     return balance
@@ -56,8 +67,9 @@ function getBalance(){
 
 module.exports = {
     addToBasket,
-    getItems,
-    getBalance,
     findBookInBasket,
-    removeFromBasket
+    removeFromBasket,
+    subTotal,
+    getItems,
+    getBalance
 };

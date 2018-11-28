@@ -116,6 +116,7 @@ test('check that it is possible to locate copies of a book in the basket', () =>
     expect(copies.length).toBe(2);
     expect(copies[0].title).toBe("Fantastic Mr Fox");
     expect(copies[1].title).toBe("Fantastic Mr Fox");
+    expect(copies[0].price).toBe(7);
 }); //end of test 3
 
 test('Check that balance is updated when a book is removed from basket that is not empty', () => {
@@ -153,50 +154,31 @@ test('Check that you cannot remove more copies of a book from a basket that are 
     //Then
     expect(basket2.getBalance()).toBe(7);
     expect(basket2.getItems()).toBe(1);
-});
+}); //end of test 6
 
-
-
-
-/*test('Check balance when multiple books added to empty basket', () => {
+test('Check that if more than 10 books added a 25% discount is applied to cheapest items', () => {
     //Given
-    expect(basket2.subTotal()).toBe(0);
-
-    //when
-    basket2.addToBasket(fantasticMrFox, 2);
-
-    //Then
-    expect(basket2.subTotal()).toBe(14);
-    expect(basket2.getItems()).toBe(2);
-
-}); //end of test 3
-
-test('Check that balance is updated when multiple books are removed from basket that is not empty', () => {
-    //Given
-    expect(basket2.subTotal()).toBe(14);
-
-    //When
-    basket2.removeFromBasket(fantasticMrFox, 2);
-
-    //Then
-    expect(basket2.subTotal()).toBe(0);
-    expect(basket2.getItems()).toBe(0);
-}); //end of test 4
-
-
-test('Check that if more than 10 books added a 25% discount is applied to any over 10', () => {
-    //Given
-    expect(basket2.subTotal()).toBe(0);
+    expect(basket2.getBalance()).toBe(7);
+    expect(basket2.getItems()).toBe(1);
 
     //When 
-    basket2.addToBasket(fantasticMrFox, 11);
+    basket2.addToBasket(fantasticMrFox, 3); //price 7
+    basket2.addToBasket(C22, 1) //price 10
+    basket2.addToBasket(YDKJS, 2); //price 3
+    basket2.addToBasket(witches, 3); //price 8 
+    basket2.addToBasket(jamesPeach, 4) //price 8
+    //if all items full price, balance is £100 and there are 14 items 
+    //(test passes if the above figures are put in the expect statements and below method call is commented out)
+    //need to find 4 cheapeast items and apply discount to these
+    basket2.subTotal();
 
     //Then
-    expect(basket2.subTotal()).toBe(75.25);
-    expect(basket2.getItems()).toBe(11);
-}); //end of test 5
+    expect(basket2.getItems()).toBe(14);
+    expect(basket2.getBalance()).toBe(87.5);  
+    //four cheapest items are YDKJS * 3 (2.25) and FMF *1 (5.25)
+}); //end of test 7
 
-test('Check that discount recalculated if books added after discount applied', () => {
+/*test('Check that discount recalculated if books added after discount applied', () => {
     //Given
     expect(basket2.subTotal()).toBe(75.25);
 
