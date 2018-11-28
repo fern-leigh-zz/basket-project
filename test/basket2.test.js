@@ -22,41 +22,143 @@
  * 
  */
 
+ /**
+ * I can add different books with varying cost to my basket and the price is calculated correctly.
+ * 
+ * If there are more than 10 books in my basket - the discount is applied to cheapest items. The 10 most expensive 
+ * books are charged at full price 
+ * 
+ * I can remove books of varying price from my basket. If the item was discounted, the discounted price is deducted 
+ * from balance. If the item was charged at full price, the full price is deducted from balance. 
+ * 
+ * My balance cannot drop below zero. 
+ * 
+ * If a full price item is removed from my basket and there are also discounted items - the balance will be 
+ * recalculated so that if there are 10 full price items in the basket. 
+ */
+
 const basket2 = require('../app/basket2');
 
 let fantasticMrFox = {
     price: 7,
     title: "Fantastic Mr Fox",
     author: "Roald Dahl",
-    isbn: "12345678",
-    type: "hardback"
+    isbn: "435-678",
+    copies: 10
+};
+
+let YDKJS = {
+    price: 3,
+    title: "You don't know JS",
+    author: "Kyle Simpson",
+    isbn: "123-456",
+    copies: 3
+};
+
+let jamesPeach = {
+    price: 8,
+    title: "James and the Giant Peach",
+    author: "Roald Dahl",
+    isbn: "784-782",
+    copies: 2
+};
+
+let witches = {
+    price: 8,
+    title: "The Witches",
+    author: "Roald Dahl",
+    isbn: "784-461",
+    copies: 8
+};
+
+let C22 = {
+    price: 10,
+    title: "Catch 22",
+    author: "Joseph Heller",
+    isbn: "234-789",
+    copies: 3
 };
 
 test('check that balance is updated after adding a book to empty basket', () => {
     //Given
-    expect(basket2.subTotal()).toBe(0);
+   expect(basket2.getBalance()).toBe(0);
 
     //When
     basket2.addToBasket(fantasticMrFox, 1);
 
     //Then
-    expect(basket2.subTotal()).toBe(7);
+    expect(basket2.getBalance()).toBe(7);
     expect(basket2.getItems()).toBe(1);
 }); //end of test 1
 
+test('check that balance is updated after adding several different books to basket', () => {
+    //Given
+   expect(basket2.getBalance()).toBe(7);
+
+    //When
+    basket2.addToBasket(fantasticMrFox, 1);
+    basket2.addToBasket(jamesPeach, 2);
+    basket2.addToBasket(C22, 1);
+
+    //Then
+    expect(basket2.getBalance()).toBe(40);
+    expect(basket2.getItems()).toBe(5);
+}); //end of test 2
+
+test('check that it is possible to locate copies of a book in the basket', () => {
+    //Given
+    expect(basket2.getItems()).toBe(5);
+
+    //When
+    let copies = basket2.findBookInBasket(fantasticMrFox);
+
+    //Then
+    expect(copies.length).toBe(2);
+    expect(copies[0].title).toBe("Fantastic Mr Fox");
+    expect(copies[1].title).toBe("Fantastic Mr Fox");
+}); //end of test 3
+
 test('Check that balance is updated when a book is removed from basket that is not empty', () => {
     //Given
-    expect(basket2.subTotal()).toBe(7);
+    expect(basket2.getBalance()).toBe(40);
 
     //When
     basket2.removeFromBasket(fantasticMrFox, 1);
 
     //Then
-    expect(basket2.subTotal()).toBe(0);
-    expect(basket2.getItems()).toBe(0);
-}); //end of test 2
+    expect(basket2.getBalance()).toBe(33);
+    expect(basket2.getItems()).toBe(4);
+}); //end of test 4
 
-test('Check balance when multiple books added to empty basket', () => {
+test('Check that balance is updated when multiple books are removed from basket that is not empty', () => {
+    //Given
+    expect(basket2.getBalance()).toBe(33);
+
+    //When
+    basket2.removeFromBasket(jamesPeach, 2);
+
+    //Then
+    expect(basket2.getBalance()).toBe(17);
+    expect(basket2.getItems()).toBe(2);
+}); //end of test 5
+
+test('Check that you cannot remove more copies of a book from a basket that are in the basket', () => {
+    //Given
+    expect(basket2.findBookInBasket(C22).length).toBe(1);
+    expect(basket2.getBalance()).toBe(17);
+
+    //When
+    basket2.removeFromBasket(C22, 2);
+    
+    //Then
+    expect(basket2.getBalance()).toBe(7);
+    expect(basket2.getItems()).toBe(1);
+});
+
+
+
+
+/*test('Check balance when multiple books added to empty basket', () => {
     //Given
     expect(basket2.subTotal()).toBe(0);
 
@@ -141,4 +243,4 @@ test('Check that balance is zero if basket reset', () => {
     //Then
     expect(basket2.subTotal()).toBe(0);
     expect(basket2.getItems()).toBe(0);
-}); // end of test 9
+}); // end of test 9 */
