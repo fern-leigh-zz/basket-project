@@ -193,7 +193,7 @@ test('Check that if more than 10 books added a 25% discount is applied to cheape
     //four cheapest items are YDKJS * 3 (2.25) and FMF *1 (5.25)
 }); //end of test 7
 
-test('Check that discount recalculated if books added after discount applied', () => {
+/*test('Check that discount recalculated if books added after discount applied', () => {
     //Given
     expect(basket2.subTotal()).toBe(75.25);
 
