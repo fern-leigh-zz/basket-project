@@ -183,13 +183,12 @@ test('Check that if more than 10 books added a 25% discount is applied to cheape
 
     //When 
     //if all items full price, balance is £100 and there are 14 items 
-    //(test passes if the above figures are put in the expect statements and below method call is commented out)
-    //need to find 4 cheapeast items and apply discount to these
+    //need to find 4 cheapest items and apply discount to these
     basket2.subTotal();
 
     //Then
     expect(basket2.getItems()).toBe(14);
-    expect(basket2.getBalance()).toBe(87.5);  
+    expect(basket2.getBalance()).toBe(88);  
     //four cheapest items are YDKJS * 3 (2.25) and FMF *1 (5.25)
 }); //end of test 7
 
