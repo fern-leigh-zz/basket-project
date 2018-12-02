@@ -71,9 +71,7 @@ function getItems() {
 
 
 function getBalance() {
-    //if (itemsInBasket.length > 10) {
         subTotal();
-    //};
     return balance
 };
 
@@ -86,5 +84,5 @@ module.exports = {
     subTotal,
     getItems,
     getBalance, 
-    emptyBasket
+    emptyBasket 
 };
