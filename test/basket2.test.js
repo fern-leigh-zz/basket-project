@@ -193,51 +193,71 @@ test('Check that if more than 10 books added a 25% discount is applied to cheape
     //four cheapest items are YDKJS * 2 (2.25) and FMF *2 (5.25) so £15 (+£80)
 }); //end of test 7
 
-/*test('Check that discount recalculated if books added after discount applied', () => {
+test('Check that discount recalculated if books added after discount applied', () => {
     //Given
-    expect(basket2.subTotal()).toBe(75.25);
+    expect(basket2.getItems()).toBe(14);
+    expect(basket2.getBalance()).toBe(95);
 
     //when
-    basket2.addToBasket(fantasticMrFox, 3);
-
+    basket2.addToBasket(C22, 1);
+    basket2.addToBasket(YDKJS, 2);
     //Then
-    expect(basket2.subTotal()).toBe(91);
-    expect(basket2.getItems()).toBe(14);
-}); //end of test 6
+    expect(basket2.getBalance()).toBe(107.75); //10*2 (C22) 8*3 (W) 8*4(JP) 7*1 (F) 3*7d(F) 4*3d (YDKJS) = 83fp & 24.75d
+    expect(basket2.getItems()).toBe(17);
+}); //end of test 8
 
 
 test('Check that discounted price of book is deducted from balance if discounted book is removed from basket', () => {
     //Given
-    expect(basket2.subTotal()).toBe(91);
+    expect(basket2.getBalance()).toBe(107.75);
+    expect(basket2.getItems()).toBe(17);
 
     //when
-    basket2.removeFromBasket(fantasticMrFox,3);
+    basket2.removeFromBasket(YDKJS,1);
 
     //Then
-    expect(basket2.subTotal()).toBe(75.25);
-    expect(basket2.getItems()).toBe(11);
-}); //end of test 7
+    expect(basket2.getBalance()).toBe(105.5);
+    expect(basket2.getItems()).toBe(16);
+}); //end of test 9
 
-test('check that if discounted and full price items are removed from basket, the balance is updated accordingly', ()=>{
+test('check that if multiple items removed and basket total >10 balance is calculated correctly', () => {
     //Given
-    expect(basket2.subTotal()).toBe(75.25);
+    expect(basket2.getBalance()).toBe(105.5);
+    expect(basket2.getItems()).toBe(16);
 
+    //when
+    basket2.removeFromBasket(YDKJS, 2);
+    basket2.removeFromBasket(jamesPeach, 1);
+
+    //Then
+    expect(basket2.getBalance()).toBe(94.75);//C22*2, W*3, JP*3, FMF*2 / FMF*2d YDKJS*1
+    expect(basket2.getItems()).toBe(13);
+
+}); //end of test 10
+
+test('check that if items are removed from basket and bsket total = <10 balance is claculated correctly', ()=>{
+    //Given
+    expect(basket2.getBalance()).toBe(94.75);//C22*2, W*3, JP*1 FMF*1
+    expect(basket2.getItems()).toBe(13);
     //When
     basket2.removeFromBasket(fantasticMrFox,3);
+    basket2.removeFromBasket(jamesPeach, 2);
+    basket2.removeFromBasket(YDKJS,1);
 
     //Then
-    expect(basket2.subTotal()).toBe(56);
-    expect(basket2.getItems()).toBe(8);
-}); // end of test 8
+    expect(basket2.getBalance()).toBe(59); 
+    expect(basket2.getItems()).toBe(7);
+}); // end of test 11
 
 test('Check that balance is zero if basket reset', () => {
     //Given
-    expect(basket2.subTotal()).toBe(56);
+    expect(basket2.getBalance()).toBe(59); 
+    expect(basket2.getItems()).toBe(7);
 
     //When
     basket2.emptyBasket();
 
     //Then
-    expect(basket2.subTotal()).toBe(0);
+    expect(basket2.getBalance()).toBe(0);
     expect(basket2.getItems()).toBe(0);
-}); // end of test 9 */
+}); // end of test 12
